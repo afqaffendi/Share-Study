@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ShareStudy | My Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white transition duration-300">
+
+  <!-- bahagian navbar -->
+  <header class="flex justify-between items-center px-8 py-5 bg-white dark:bg-gray-800 shadow-md">
+    <!-- logo sharestudy -->
+    <a href="index.html">
+      <img src="assets/light-mode.png" alt="Logo Light" class="h-10 block dark:hidden transition-opacity duration-300">
+      <img src="assets/dark-mode.png" alt="Logo Dark" class="h-10 hidden dark:block transition-opacity duration-300">
+    </a>
+
+    <!-- toggle switch untuk dark/light mode -->
+    <div class="flex items-center gap-4 ml-4">
+      <span id="lightLabel" class="font-semibold text-gray-900 dark:text-gray-500"></span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" id="themeToggle" class="sr-only peer">
+        <div class="w-14 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full peer peer-checked:from-gray-600 peer-checked:to-gray-800 transition-colors"></div>
+        <div class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-transform peer-checked:translate-x-6 shadow-lg flex items-center justify-center">
+          <div class="w-2 h-2 bg-white rounded-full peer-checked:scale-0 transition-transform"></div>
+        </div>
+      </label>
+      <span id="darkLabel" class="font-semibold text-gray-400 dark:text-white"></span>
+    </div>
+  </header>
+
+  <!-- list notes -->
+  <section class="max-w-6xl mx-auto px-6 py-10">
+    <h2 class="text-3xl font-bold mb-6 text-center">My Uploaded Notes</h2>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <!-- note 1 -->
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition p-6">
+        <h4 class="text-lg font-semibold mb-1 text-gray-900 dark:text-white">Operating Systems Midterm</h4>
+        <p class="text-sm text-gray-500 dark:text-gray-300 mb-1">📂 Category: Computer Science</p>
+        <p class="text-sm text-gray-400 dark:text-gray-400 mb-2">📥 142 downloads • Uploaded on 15 June 2025</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          Includes chapters 1–5 with exam tips.
+        </p>
+        <div class="flex gap-3">
+          <button class="px-4 py-1 bg-indigo-600 dark:bg-indigo-400 text-white dark:text-gray-900 text-sm rounded hover:bg-indigo-700 dark:hover:bg-indigo-500 transition">
+            Edit
+          </button>
+          <button class="px-4 py-1 bg-red-500 dark:bg-red-600 text-white text-sm rounded hover:bg-red-600 dark:hover:bg-red-700 transition">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- note 2 -->
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition p-6">
+        <h4 class="text-lg font-semibold mb-1 text-gray-900 dark:text-white">Mathematics Past Year Paper</h4>
+        <p class="text-sm text-gray-500 dark:text-gray-300 mb-1">📂 Category: Mathematics</p>
+        <p class="text-sm text-gray-400 dark:text-gray-400 mb-2">📥 200 downloads • Uploaded on 10 June 2025</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          All questions with solutions from 2020–2022.
+        </p>
+        <div class="flex gap-3">
+          <button class="px-4 py-1 bg-indigo-600 dark:bg-indigo-400 text-white dark:text-gray-900 text-sm rounded hover:bg-indigo-700 dark:hover:bg-indigo-500 transition">
+            Edit
+          </button>
+          <button class="px-4 py-1 bg-red-500 dark:bg-red-600 text-white text-sm rounded hover:bg-red-600 dark:hover:bg-red-700 transition">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- bahagian bawah -->
+  <footer class="text-center text-sm text-gray-400 dark:text-gray-500 py-8">
+    &copy; 2025 ShareStudy. All rights reserved.
+  </footer>
+
+  <!-- javascript untuk dark mode -->
+  <script>
+    const html = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const lightLabel = document.getElementById("lightLabel");
+    const darkLabel = document.getElementById("darkLabel");
+
+    if (localStorage.getItem("theme") === "dark") {
+      html.classList.add("dark");
+      toggle.checked = true;
+    }
+
+    toggle.addEventListener("change", () => {
+      html.classList.toggle("dark");
+      const isDark = html.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+
+      lightLabel.classList.toggle("text-gray-900", !isDark);
+      lightLabel.classList.toggle("text-gray-500", isDark);
+      darkLabel.classList.toggle("text-gray-400", !isDark);
+      darkLabel.classList.toggle("text-white", isDark);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ShareStudy | Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white transition duration-300">
+
+    <!-- bahagian navbar -->
+<header class="flex justify-between items-center px-8 py-5 bg-white dark:bg-gray-800 shadow-md">
+  <!-- logo sharestuy navbar -->
+  <a href="index.html">
+    <img src="assets/light-mode.png" alt="Logo Light" class="h-10 block dark:hidden transition-opacity duration-300">
+    <img src="assets/dark-mode.png" alt="Logo Dark" class="h-10 hidden dark:block transition-opacity duration-300">
+  </a>
+
+  <!-- toggle switch untuk dark/light mode -->
+  <div class="flex items-center gap-4 ml-4">
+    <span id="lightLabel" class="font-semibold text-gray-900 dark:text-gray-500"></span>
+    <label class="relative inline-flex items-center cursor-pointer">
+      <input type="checkbox" id="themeToggle" class="sr-only peer">
+      <div class="w-14 h-8 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full peer peer-checked:from-gray-600 peer-checked:to-gray-800 transition-colors"></div>
+      <div class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-transform peer-checked:translate-x-6 shadow-lg flex items-center justify-center">
+        <div class="w-2 h-2 bg-white rounded-full peer-checked:scale-0 transition-transform"></div>
+      </div>
+    </label>
+    <span id="darkLabel" class="font-semibold text-gray-400 dark:text-white"></span>
+  </div>
+</header>
+
+  <div class="flex items-center justify-center min-h-screen px-6">
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+      <h2 class="text-2xl font-bold mb-6 text-center">Create Your Account</h2>
+      <form class="space-y-5">
+        <div>
+          <label class="block text-sm mb-1"></label>
+          <input type="text" name="name" placeholder="Full Name" class="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm mb-1"></label>
+          <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm mb-1"></label>
+          <input type="password" name="password" placeholder="Password" required class="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label class="block text-sm mb-1"></label>
+          <input type="password" name="confirm" placeholder="Confirm Password" required class="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+
+        <!-- button register -->
+        <button type="button"
+                onclick="showToast('Account created successfully!', true)"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-400 dark:hover:bg-indigo-500 text-white dark:text-gray-900 font-medium py-2 rounded-md transition">
+          Register
+        </button>
+      </form>
+
+      <!-- line divider -->
+      <div class="flex items-center justify-center my-4">
+        <span class="text-gray-400 dark:text-gray-500 text-sm">or</span>
+      </div>
+
+      <!-- UI untuk google login-->      
+      <div class="mt-4">
+        <button type="button"
+          class="w-full flex items-center justify-center gap-3 border dark:border-gray-600 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" class="w-5 h-5" alt="Google Logo">
+          <span class="text-sm">Sign up with Google</span>
+        </button>
+      </div>
+
+      <!-- pegi ke login -->
+      <p class="mt-4 text-sm text-center text-gray-500 dark:text-gray-400">
+        Already have an account?
+        <a href="login.html" class="text-indigo-600 dark:text-indigo-400 hover:underline">Login here</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- tempat toast keluar -->
+  <div id="toast"
+       class="fixed bottom-6 right-6 hidden bg-red-500 text-white dark:text-white px-5 py-3 rounded shadow-lg z-50 transition transform translate-y-8 opacity-0"
+       role="alert">
+    <span id="toast-message">This is a toast message</span>
+  </div>
+
+  <!-- javascript untuk dark mode dan toast -->
+  <script>
+    const html = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const lightLabel = document.getElementById("lightLabel");
+    const darkLabel = document.getElementById("darkLabel");
+
+    // mode akan ikut yang sebelum ni kita tukaq
+    if (localStorage.getItem("theme") === "dark") {
+      html.classList.add("dark");
+      toggle.checked = true;
+    }
+
+    // tukar theme bila click toggle
+    toggle.addEventListener("change", () => {
+      html.classList.toggle("dark");
+      const isDark = html.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+
+      // update label warna
+      lightLabel.classList.toggle("text-gray-900", !isDark);
+      lightLabel.classList.toggle("text-gray-500", isDark);
+      darkLabel.classList.toggle("text-gray-400", !isDark);
+      darkLabel.classList.toggle("text-white", isDark);
+    });
+
+    // nak display toast message
+    function showToast(message, success = false) {
+      const toast = document.getElementById("toast");
+      const messageBox = document.getElementById("toast-message");
+
+      messageBox.textContent = message;
+      toast.classList.remove("bg-red-500", "bg-green-500");
+      toast.classList.add(success ? "bg-green-500" : "bg-red-500");
+
+      toast.classList.remove("hidden", "opacity-0", "translate-y-8");
+      toast.classList.add("opacity-100", "translate-y-0");
+
+      setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "translate-y-8");
+        setTimeout(() => toast.classList.add("hidden"), 300);
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
