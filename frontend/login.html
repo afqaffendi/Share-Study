@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ShareStudy | Login</title>
+  <title>Login | ShareStudy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -21,7 +21,7 @@
 
     <!-- bahagian navbar -->
 <header class="flex justify-between items-center px-8 py-5 bg-white dark:bg-gray-800 shadow-md">
-  <!-- logo yang boleh click ke home -->
+  <!-- logo yang boleh klik balik ke home -->
   <a href="index.html">
     <img src="assets/light-mode.png" alt="Logo Light" class="h-10 block dark:hidden transition-opacity duration-300">
     <img src="assets/dark-mode.png" alt="Logo Dark" class="h-10 hidden dark:block transition-opacity duration-300">
@@ -52,7 +52,7 @@
   </div>
   <div>
     <label class="block text-sm mb-1"></label>
-    <input type="password" name="password" placeholder="Password" required
+    <input type="password" name="password" required
       class="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
   </div>
   <button type="button" onclick="showToast('Login failed. Try again.', false)"
@@ -61,10 +61,6 @@
   </button>
 </form>
 
-<!-- line divider -->
-      <div class="flex items-center justify-center my-4">
-        <span class="text-gray-400 dark:text-gray-500 text-sm">or</span>
-      </div>
 <!-- UI untuk google login-->
 <div class="mt-4">
   <button type="button"
